@@ -44,7 +44,17 @@
         align-items: center !important; 
         gap: 40px !important; 
     }
-    .banner-three-left, .banner-three-center, .banner-three-right {
+    
+    /* OVERRIDE THE TEMPLATE'S DISPLAY: NONE ON MOBILE */
+    .banner-three-left, .banner-three-right {
+        display: block !important; 
+        width: 100% !important;
+        max-width: 600px !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+    }
+    
+    .banner-three-center {
         width: 100% !important;
         max-width: 600px !important;
         margin: 0 auto !important;
@@ -91,6 +101,9 @@
     .feature-three-title { font-size: clamp(30px, 10vw, 70px) !important; }
     h2.title { font-size: 26px !important; line-height: 1.3 !important; }
     .about-three-thumb { position: relative !important; width: 100% !important; margin-bottom: 30px; }
+    
+    /* OVERRIDE THE TEMPLATE'S DISPLAY: NONE ON SMALL MOBILE TOO */
+    .banner-three-left, .banner-three-right { display: block !important; }
     
     /* Stats Cards Fix */
     .tw-text-101 { font-size: 50px !important; }
