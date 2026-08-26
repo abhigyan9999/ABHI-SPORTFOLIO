@@ -1782,5 +1782,26 @@
     <script src="assets/js/main.js"></script>
     <!-- cursor js -->
     <script src="assets/js/tw-cursor.js"></script>
+        <!-- cursor js -->
+    <script src="assets/js/tw-cursor.js"></script>
+
+    <script>
+      // FIX GSAP NATIVE ANCHOR LINK JUMP BUG
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          if(targetId === '#') return;
+          const targetEl = document.querySelector(targetId);
+          if (targetEl && typeof gsap !== 'undefined') {
+             gsap.to(window, { duration: 1, scrollTo: { y: targetEl, offsetY: 50 }, ease: "power2.out" });
+          } else if (targetEl) {
+             targetEl.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
   </body>
 </html>
