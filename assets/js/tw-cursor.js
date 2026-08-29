@@ -45,6 +45,7 @@ if ($("body").not(".is-mobile").hasClass("tw-magic-cursor")) {
     }
   }
 
+
   // Hide on hover over buttons and links
   $("a, button, .tw-cart-minus, .tw-cart-plus")
     .not(".cursor-hide")
@@ -52,7 +53,7 @@ if ($("body").not(".is-mobile").hasClass("tw-magic-cursor")) {
       gsap.to($ball, { duration: 0.2, scale: 0, opacity: 0 });
     })
     .on("mouseleave", function () {
-      if (!$("[data-cursor]:hover").length) {
+      if (!$("[data-cursor]:mouseover").length) {
         gsap.to($ball, {
           duration: 0.2,
           scale: $ballScale,
@@ -93,10 +94,10 @@ if ($("body").not(".is-mobile").hasClass("tw-magic-cursor")) {
     var cursorText = $(this).attr("data-cursor") || "View";
     $(this)
       .on("mouseenter", function () {
-        var $_ball = $("#ball");
+        $_ball = $("#ball");
         $_ball.addClass("cursor-view-active");
         $_ball.empty();
-        var $ballView = $('<div class="ball-view"><span class="ball-view-arrow">&#x2197;</span><span class="ball-view-text">' + cursorText + '</span></div>');
+        var $ballView = $('<div class="ball-view"><span class="ball-view-text">' + cursorText + '</span></div>');
         $_ball.append($ballView);
         gsap.killTweensOf($_ball);
         gsap.to($_ball, {
@@ -111,7 +112,7 @@ if ($("body").not(".is-mobile").hasClass("tw-magic-cursor")) {
         });
       })
       .on("mouseleave", function () {
-        var $_ball = $("#ball");
+        $_ball = $("#ball");
         $_ball.removeClass("cursor-view-active");
         gsap.killTweensOf($_ball);
         gsap.to($_ball, {
