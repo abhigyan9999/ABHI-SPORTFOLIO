@@ -45,18 +45,20 @@ if ($("body").not(".is-mobile").hasClass("tw-magic-cursor")) {
     }
   }
 
-  // Hide on hover
+  // Hide on hover over buttons and links
   $("a, button, .tw-cart-minus, .tw-cart-plus")
     .not(".cursor-hide")
     .on("mouseenter", function () {
-      gsap.to($ball, { duration: 0.3, scale: 0, opacity: 0 });
+      gsap.to($ball, { duration: 0.2, scale: 0, opacity: 0 });
     })
     .on("mouseleave", function () {
-      gsap.to($ball, {
-        duration: 0.3,
-        scale: $ballScale,
-        opacity: $ballOpacity,
-      });
+      if (!$("[data-cursor]:hover").length) {
+        gsap.to($ball, {
+          duration: 0.2,
+          scale: $ballScale,
+          opacity: $ballOpacity,
+        });
+      }
     });
 
   // Hide on click
@@ -86,48 +88,44 @@ if ($("body").not(".is-mobile").hasClass("tw-magic-cursor")) {
     gsap.to("#magic-cursor", { duration: 0.3, autoAlpha: 1 });
   });
 
-  // Cursor view on hover (Fixed: single crisp text, no duplication)
+  // Cursor view on hover (data-cursor)
   $("[data-cursor]").each(function () {
     var cursorText = $(this).attr("data-cursor") || "View";
     $(this)
       .on("mouseenter", function () {
-        $("#ball").addClass("with-blur");
-        $ball.empty();
-        var $ballView = $('<div class="ball-view"></div>').text(cursorText);
-        $ball.append($ballView);
-        gsap.to($ball, {
-          duration: 0.3,
-          yPercent: -75,
-          width: 140,
-          height: 140,
+        var $_ball = $("#ball");
+        $_ball.addClass("cursor-view-active");
+        $_ball.empty();
+        var $ballView = $('<div class="ball-view"><span class="ball-view-arrow">&#x2197;</span><span class="ball-view-text">' + cursorText + '</span></div>');
+        $_ball.append($ballView);
+        gsap.killTweensOf($_ball);
+        gsap.to($_ball, {
+          duration: 0.25,
+          yPercent: -50,
+          xPercent: -50,
+          width: 120,
+          height: 120,
           opacity: 1,
-          borderWidth: 1,
-          zIndex: 99999,
-          backdropFilter: "blur(14px)",
-          backgroundColor: "#ff6644",
-          boxShadow: "0px 1px 3px 0px rgba(18, 20, 32, 0.14)",
+          scale: 1,
+          autoAlpha: 1,
         });
-        gsap.to($ballView, { duration: 0.3, scale: 1, autoAlpha: 1 });
       })
       .on("mouseleave", function () {
-        gsap.to($ball, {
-          duration: 0.3,
+        var $_ball = $("#ball");
+        $_ball.removeClass("cursor-view-active");
+        gsap.killTweensOf($_ball);
+        gsap.to($_ball, {
+          duration: 0.25,
           yPercent: -50,
+          xPercent: -50,
           width: $ballWidth,
           height: $ballHeight,
           opacity: $ballOpacity,
-          borderWidth: $ballBorderWidth,
-          backgroundColor: "#1c1d21",
-        });
-        gsap.to($ball.find(".ball-view"), {
-          duration: 0.2,
-          scale: 0,
-          autoAlpha: 0,
-          onComplete: function () {
-            $ball.empty();
+          scale: 1,
+          onStart: function () {
+            $_ball.empty();
           },
         });
-        $("#ball").removeClass("with-blur");
       });
     $(this).addClass("not-hide-cursor");
   });
