@@ -66,7 +66,7 @@ if ($("body").not(".is-mobile").hasClass("tw-magic-cursor")) {
   $("a")
     .not('[target="_blank"]')
     .not(".cursor-hide")
-    .not('[href^="#"]')
+    .not('[href^="${#'}"]')
     .not('[href^="mailto"]')
     .not('[href^="tel"]')
     .not(".lg-trigger")
