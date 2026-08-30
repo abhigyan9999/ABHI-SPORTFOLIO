@@ -1904,6 +1904,34 @@
       });
     </script>
 
-    </body>
+    
+    <!-- Permanent Fix: Single Cursor Arrow -->
+    <style>
+      #ball .ball-view .ball-view-arrow {
+        display: none !important;
+      }
+      #ball .ball-view::before {
+        content: "\e092" !important;
+        position: absolute !important;
+        inset-block-start: -20px !important;
+        inset-inline-start: 50% !important;
+        transform: translateX(-50%) !important;
+        color: #000 !important;
+        font-family: "Phosphor" !important;
+        display: block !important;
+      }
+    </style>
+    <script>
+      // Runtime safeguard to remove any duplicate arrow elements immediately
+      document.addEventListener('mouseover', function(e) {
+        if (e.target && e.target.closest('[data-cursor]')) {
+          setTimeout(function() {
+            var arrows = document.querySelectorAll('#ball .ball-view-arrow');
+            arrows.forEach(function(el) { el.remove(); });
+          }, 10);
+        }
+      }, true);
+    </script>
+  </body>
 </html>
 
