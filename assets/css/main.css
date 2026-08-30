@@ -7585,12 +7585,7 @@ body.tw-magic-cursor #magic-cursor {
   margin-block-start: 14px;
 }
 #ball .ball-view::before {
-  position: absolute;
-  inset-block-start: -20px;
-  inset-inline-start: 50%;
-  transform: translateX(-50%);
-  color: hsl(var(--black));
-  font-family: "Phosphor";
+  display: none;
 }
 
 /* Ball drag 
