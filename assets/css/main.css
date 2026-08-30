@@ -7585,7 +7585,6 @@ body.tw-magic-cursor #magic-cursor {
   margin-block-start: 14px;
 }
 #ball .ball-view::before {
-  content: "\e092";
   position: absolute;
   inset-block-start: -20px;
   inset-inline-start: 50%;
